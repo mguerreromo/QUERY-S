@@ -1,0 +1,6 @@
+--0 to 9		Mensaje de informacion
+--10			Mensajes de informativos que devuelven informacion de estado
+--11 to 16	Errores que pueden ser corregidos por el ususario
+--17 to 19	Error de software que no pueden ser corregidos por el usuario
+--20 to 24	Errores de Sistemea Serios
+--25			Error de terminacion de Sql Server
