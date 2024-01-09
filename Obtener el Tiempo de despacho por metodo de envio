@@ -1,0 +1,18 @@
+USE AdventureWorks2019
+GO
+
+-- Saber el tiempo de despacho por tipo de envio
+
+SELECT 
+	[soh].[SalesOrderID]
+,	DATEDIFF(day,[soh].[OrderDate],[soh].[ShipDate]) AS TiempoDespacho
+,	[soh].[ShipMethodID]
+,	[sm].[Name]
+FROM 
+	[AdventureWorks2019].[Sales].[SalesOrderHeader] AS [soh]
+INNER JOIN 
+	[Purchasing].[ShipMethod] AS [sm]
+  ON 
+	[soh].[ShipMethodID] = [sm].[ShipMethodID]
+ORDER BY
+	TiempoDespacho
