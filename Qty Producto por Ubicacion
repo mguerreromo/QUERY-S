@@ -1,0 +1,13 @@
+USE AdventureWorks2019
+GO
+
+-- Saber la cantidad total del producto por Ubicacion
+
+SELECT 
+	[pi].[ProductID]
+,	[pi].[LocationID]
+,	[pi].[Bin]
+,	[pi].[Quantity]
+,	SUM([pi].[Quantity]) OVER(PARTITION BY [LocationID], [Bin])	AS [TotalQty]
+FROM
+	[Production].[ProductInventory] AS [pi]
