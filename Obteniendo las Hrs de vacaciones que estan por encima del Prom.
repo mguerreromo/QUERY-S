@@ -1,0 +1,28 @@
+USE AdventureWorks2019
+GO
+
+--Necesitamos saber las horas de vacaciones que esten por encima del promedio por poisicion.
+
+SELECT
+		[EM].[BusinessEntityID]
+,		[EM].[JobTitle]
+,		[EM].[VacationHours]
+,		[subC].AverageVacation
+FROM 
+	[AdventureWorks2019].[HumanResources].[Employee] AS [em]
+	INNER JOIN
+	(
+	SELECT
+		[e2].[JobTitle],
+		AVG([e2].[VacationHours]) AS AverageVacation
+	FROM 
+		[AdventureWorks2019].[HumanResources].[Employee] AS [e2]
+	GROUP BY [JobTitle] 
+	) AS [subC]
+ON 
+	[EM].JobTitle = [subC].[JobTitle]
+WHERE
+	[EM].[VacationHours] > [subC].AverageVacation
+ORDER BY 
+	[em].[JobTitle]
+
