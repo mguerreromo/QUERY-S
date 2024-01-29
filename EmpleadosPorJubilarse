@@ -1,0 +1,23 @@
+
+--Buscando los empleados que le restan menos de tres anio para jubilarse
+DECLARE @jubilacion int = 30
+;WITH cte_TiempoActivoEmpleado
+
+AS
+(
+
+SELECT
+	E1.documento
+,	YEAR(GETDATE()) - YEAR(E1.fechaingreso) [TiempoActivo]
+FROM
+	empleados AS E1
+)
+
+SELECT
+	documento
+,	TiempoActivo
+FROM
+	cte_TiempoActivoEmpleado
+WHERE
+	@jubilacion - TiempoActivo < 3
+
